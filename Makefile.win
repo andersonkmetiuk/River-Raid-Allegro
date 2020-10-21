@@ -1,0 +1,42 @@
+# Project: Project1
+# Makefile created by Dev-C++ 4.9.9.9
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Project1_private.res
+OBJ      = jogo.o menu.o river_raid.o teclado.o $(RES)
+LINKOBJ  = jogo.o menu.o river_raid.o teclado.o $(RES)
+LIBS     = -L"E:/PROG 1/Dev-Cpp/lib" -L"E:/PROG 1/Dev-Cpp/lib/gcc" -static-libstdc++ -static-libgcc -mwindows -lallegro-4.4.2-monolith-mt-debug 
+INCS     = -I"E:/PROG 1/Dev-Cpp/include" 
+CXXINCS  = -I"E:/PROG 1/Dev-Cpp/include"  -I"E:/PROG 1/Dev-Cpp/include/ddk"  -I"E:/PROG 1/Dev-Cpp/include/gdiplus"  -I"E:/PROG 1/Dev-Cpp/include/GL" 
+BIN      = Project1.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS   = $(INCS)  
+RM       = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before Project1.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "Project1.exe" $(LIBS)
+
+jogo.o: jogo.c
+	$(CC) -c jogo.c -o jogo.o $(CFLAGS)
+
+menu.o: menu.c
+	$(CC) -c menu.c -o menu.o $(CFLAGS)
+
+river_raid.o: river_raid.c
+	$(CC) -c river_raid.c -o river_raid.o $(CFLAGS)
+
+teclado.o: teclado.c
+	$(CC) -c teclado.c -o teclado.o $(CFLAGS)
+
+Project1_private.res: Project1_private.rc 
+	$(WINDRES) -i Project1_private.rc --input-format=rc -o Project1_private.res -O coff 
